@@ -1,16 +1,60 @@
-# React + Vite
+I. Core Features & Functionality
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Enlistment:
 
-Currently, two official plugins are available:
+Action: Click a bot in the Bot Collection.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Result: Moves the bot into the Your Bot Army section.
 
-## React Compiler
+Rule Check: Prevents duplicate bots from being enlisted.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Release (Temporary Remove):
 
-## Expanding the ESLint configuration
+Action: Click a bot in the Your Bot Army.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Result: Removes the bot from the army and returns it to the Bot Collection.
+
+Technical Note: This is a state change only; no API call is made.
+
+Discharge (Permanent Delete):
+
+Action: Click the 'X' button on a bot in the Your Bot Army.
+
+Result: Permanently deletes the bot from the application.
+
+Technical Note: Sends a DELETE request to the API, removing the bot from the server's db.json file.
+
+
+2.Technical Stack & Implementation
+
+Frontend: Built using React (functional components and hooks).
+
+Styling: Uses Custom, modular Plain CSS for styling and the responsive grid layout.
+
+Component Design: The BotCard component is highly reusable for both the Collection and the Army sections.
+
+Data Layer: Local REST API served by json-server using the db.json file.
+
+Data Flow: The main logic in App.jsx handles initial data fetching (useEffect) and all state transformations (enlist, release, delete).
+
+III. Setup and Installation
+
+Prerequisites:
+Node.js and npm (or yarn).
+
+The json-server package (install globally with npm install -g json-server).
+
+Steps:
+Start the Mock Backend (API):
+
+Open your terminal in the directory containing db.json.
+
+Run the command: json-server --watch db.json --port 8001
+
+Start the React Application:
+
+Open a separate terminal window.
+
+Run the command: npm start (or yarn start).
+
+The application will then load and fetch data from the running mock API.
