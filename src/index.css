@@ -1,68 +1,161 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+/* --- Global Styles --- */
 body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f9;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* --- App Container --- */
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  text-align: center;
+  color: #3f51b5;
+  margin-bottom: 25px;
+  font-size: 2.8em;
+  font-weight: 800;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+/* --- Bot Grid Layout --- */
+.bot-grid {
+  display: grid;
+  /* Responsive grid: min of 180px wide cards, up to max available space */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+}
+
+/* --- Your Bot Army Styles (.bot-army) --- */
+.bot-army {
+  background-color: #e8eaf6; /* Light indigo background */
+  border: 2px solid #9fa8da;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 40px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.army-heading {
+  color: #303f9f;
+  border-bottom: 3px solid #7986cb;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.empty-message {
+  text-align: center;
+  font-style: italic;
+  color: #5c6bc0;
+  padding: 15px;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border: 1px dashed #9fa8da;
+  border-radius: 8px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* --- Bot Collection Styles (.bot-collection-container) --- */
+.bot-collection-container {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.collection-heading {
+  color: #424242;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+/* --- Individual Bot Card Styles (.bot-card) --- */
+.bot-card {
+  border: 1px solid #b0bec5;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden; /* Ensures discharge button stays inside */
+}
+
+.bot-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.bot-card img {
+  width: 100%;
+  height: 140px; 
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #eee;
+}
+
+.bot-class {
+  font-weight: bold;
+  color: #00897b;
+  margin: 5px 0;
+  font-size: 0.95em;
+  text-transform: uppercase;
+}
+
+.catchphrase {
+  font-style: italic;
+  color: #757575;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+  height: 36px; /* Fixed height to prevent shifting */
+  overflow: hidden;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 1px dashed #cfd8dc;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+/* Discharge Button (Used in BotCard when in the army) */
+.discharge-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #e53935; /* Red */
+  color: white;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.discharge-btn:hover {
+  background-color: #d32f2f;
+  transform: scale(1.05);
 }

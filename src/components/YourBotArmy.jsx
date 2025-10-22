@@ -3,23 +3,28 @@ import BotCard from "./BotCard";
 
 function YourBotArmy({ army, onRelease, onDischarge }) {
   return (
-    <div className="p-4 bg-indigo-100 rounded-lg shadow-inner mb-8">
-      <h2 className="text-2xl font-bold text-indigo-700 mb-4">Your Bot Army</h2>
+    // Uses simple CSS class names for styling (defined in index.css)
+    <div className="bot-army-container">
+      <h2 className="army-heading">🛡️ Your Bot Army</h2>
 
+      {/* Conditional rendering: show bots if array has content, otherwise show message */}
       {army && army.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
+        // Uses the common CSS grid class for layout
+        <div className="bot-grid">
           {army.map((bot) => (
+            // CRITICAL FIX: Now correctly uses the BotCard component
             <BotCard
               key={bot.id}
               bot={bot}
-              onClick={() => onRelease(bot)}
-              onDischarge={() => onDischarge(bot)}
-              inArmy={true}
+              onCardClick={onRelease} // Clicking a bot in the army releases it
+              showDischargeButton={true} // Show the 'X' button in the army
+              onDischarge={onDischarge} // Pass the permanent delete function
             />
           ))}
         </div>
       ) : (
-        <p className="text-indigo-600 italic font-medium">
+        // Simple message for an empty army
+        <p className="empty-message">
           Your army is empty! Enlist bots from the collection below.
         </p>
       )}
